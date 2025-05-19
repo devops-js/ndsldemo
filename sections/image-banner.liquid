@@ -1,0 +1,147 @@
+<style>
+.mob-img-ks{
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .desk-img-ks {
+    display: none;
+  }
+  .mob-img-ks {
+    display: block;
+  }
+}
+  
+</style>
+
+{% if section.settings.title != blank %}
+<header class="page-header"><h2 class="heading-1">{{section.settings.title}}</h2></header>
+{% endif %}
+<section class="page-banner-section">
+  <div class="{% if section.settings.layout == 'default' %}container{% elsif section.settings.layout == 'padd_60' %}container-padd60{% else %}container-fluid{% endif %}">
+    <div class="row">
+      <div class="page-banner" style="margin: 0 auto;">
+        {% if section.settings.link != blank %}
+        <a href="{{ section.settings.link }}{% if section.settings.variant != blank %}?variant={{section.settings.variant}}{% endif %}" class="item-link">
+        {% endif %}
+          <picture>
+            {% if section.settings.image != blank %}
+            <img data-src="" class="desk-img-ks" src="{{ section.settings.image | img_url: 'master' }}" alt="BIRKENSTOCK" itemprop="logo" class="lazyautosizes lazyloaded small-hide" data-sizes="auto" sizes="1278px">
+            {% endif %}
+            {% if section.settings.mobile_image != blank %} 
+            <img data-src="" class="mob-img-ks" src="{{ section.settings.mobile_image | img_url: 'master' }}" alt="BIRKENSTOCK" itemprop="logo" class="mobile-image lazyautosizes lazyloaded large-up-hide" data-sizes="auto" sizes="1278px">
+            {% endif %}
+          </picture>
+        {% if section.settings.link != blank %}
+        </a>
+        {% endif %}
+        {% if section.settings.img_bottom_text != blank %}
+                      <div class="img-bottom-text">{{section.settings.img_bottom_text}}</div>
+                      {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Image banner",
+    "settings": [
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Banner Layout:",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "padd_60",
+            "label": "Boxed"
+          },
+          {
+            "value": "full",
+            "label": "Full Width"
+          }
+        ],
+        "default": "full"
+      }, 
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title on top of banner"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Banner image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Banner image for mobile"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "variant",
+        "label": "Variant ID"
+      },
+	  {
+        "type" : "text",
+        "id" : "img_bottom_text",
+        "label" : "Image Bottom Text"
+      },
+	  {
+        "type": "range",
+        "id": "pad_top",
+        "label": "Padding Top",
+        "step": 1,
+        "min": 0,
+        "max": 100,
+        "default": 0,
+        "unit": "px"
+      },
+	  {
+        "type": "range",
+        "id": "pad_bottom",
+        "label": "Padding Bottom",
+        "step": 1,
+        "min": 0,
+        "max": 100, 
+        "default": 30,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mob_pad_top",
+        "label": "Mobile Padding Top",
+        "step": 1,
+        "min": 0,
+        "max": 100,
+        "default": 0,
+        "unit": "px"
+      },
+	  {
+        "type": "range",
+        "id": "mob_pad_bottom",
+        "label": "Mobile Padding Bottom",
+        "step": 1,
+        "min": 0,
+        "max": 100, 
+        "default": 30,
+        "unit": "px"
+      }
+    ],
+  	"presets": [
+      {
+        "name": "Image banner",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

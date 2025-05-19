@@ -1,0 +1,39 @@
+<h3>{{ section.settings.heading}}</h3>
+<p>{{ section.settings.description}}</p>
+
+{% for block in section.blocks %}
+<img src="{{ block.settings.image | img_url:'master' }}">
+{% endfor %}
+
+
+{% schema %}
+  {
+    "name": "Custom Addsets",
+    "settings": [
+    {
+    "type": "text",
+    "label": "Page Heading",
+    "id": "heading"
+    },
+    {
+    "type": "richtext",
+    "label": "Page Description",
+    "id": "description"
+    }
+   ],
+   "blocks": [
+    {
+     "type": "image",
+     "name": "image block",
+     "settings": [
+    {
+     "type": "image_picker",
+     "label": "Add Banner",
+     "id": "image"
+    }
+    ]
+    }
+
+   ]
+  }
+{% endschema %}
